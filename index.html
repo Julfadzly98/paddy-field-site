@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Paddy Field Dashboard</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Segoe UI', sans-serif;
+    }
+
+    body {
+      background-color: #f4f6f8;
+      display: flex;
+      min-height: 100vh;
+    }
+
+    .sidebar {
+      width: 220px;
+      background-color: #1e293b;
+      color: #fff;
+      padding: 20px;
+    }
+
+    .sidebar h2 {
+      margin-bottom: 30px;
+      font-size: 22px;
+    }
+
+    .sidebar a {
+      color: #cbd5e1;
+      text-decoration: none;
+      display: block;
+      padding: 10px 0;
+      transition: 0.3s;
+    }
+
+    .sidebar a:hover {
+      color: #fff;
+    }
+
+    .main {
+      flex: 1;
+      padding: 30px;
+    }
+
+    .header {
+      font-size: 24px;
+      margin-bottom: 20px;
+    }
+
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+      gap: 20px;
+    }
+
+    .card {
+      background: #fff;
+      padding: 20px;
+      border-radius: 12px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+    }
+
+    .card h3 {
+      margin-bottom: 10px;
+    }
+
+    .status {
+      padding: 8px 12px;
+      border-radius: 8px;
+      display: inline-block;
+      font-weight: bold;
+    }
+
+    .good {
+      background-color: #bbf7d0;
+      color: #166534;
+    }
+
+    .moderate {
+      background-color: #fde68a;
+      color: #92400e;
+    }
+
+    .bad {
+      background-color: #fecaca;
+      color: #991b1b;
+    }
+
+    @media (max-width: 768px) {
+      .sidebar {
+        display: none;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="sidebar">
+    <h2>🌾 Paddy Dashboard</h2>
+    <a href="#">Overview</a>
+    <a href="#">Soil Data</a>
+    <a href="#">Weather</a>
+    <a href="#">Reports</a>
+  </div>
+
+  <div class="main">
+    <div class="header">Field Health Status</div>
+    <div class="cards">
+      <div class="card">
+        <h3>Nitrogen (N)</h3>
+        <p>Value: 78 ppm</p>
+        <span class="status good">Good</span>
+      </div>
+      <div class="card">
+        <h3>Phosphorus (P)</h3>
+        <p>Value: 45 ppm</p>
+        <span class="status moderate">Moderate</span>
+      </div>
+      <div class="card">
+        <h3>Potassium (K)</h3>
+        <p>Value: 25 ppm</p>
+        <span class="status bad">Low</span>
+      </div>
+      <div class="card">
+        <h3>Moisture</h3>
+        <p>Value: 31%</p>
+        <span class="status good">Optimal</span>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
