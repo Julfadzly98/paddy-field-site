@@ -2,8 +2,9 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Paddy Field Dashboard</title>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <style>
     * {
       box-sizing: border-box;
@@ -23,6 +24,12 @@
       background-color: #1e293b;
       color: #fff;
       padding: 20px;
+      position: fixed;
+      height: 100%;
+      top: 0;
+      left: 0;
+      transition: transform 0.3s ease;
+      z-index: 1000;
     }
 
     .sidebar h2 {
@@ -44,7 +51,10 @@
 
     .main {
       flex: 1;
+      margin-left: 220px;
       padding: 30px;
+      width: 100%;
+      transition: margin-left 0.3s ease;
     }
 
     .header {
@@ -52,10 +62,19 @@
       margin-bottom: 20px;
     }
 
+    .field-image {
+      width: 100%;
+      max-width: 800px;
+      margin-bottom: 30px;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    }
+
     .cards {
       display: grid;
       grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
       gap: 20px;
+      margin-bottom: 40px;
     }
 
     .card {
@@ -91,15 +110,55 @@
       color: #991b1b;
     }
 
+    .menu-toggle {
+      display: none;
+      position: fixed;
+      top: 20px;
+      left: 20px;
+      z-index: 1001;
+      background: #1e293b;
+      color: white;
+      padding: 10px 15px;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    canvas {
+      max-width: 100%;
+      background: #fff;
+      border-radius: 12px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+      padding: 20px;
+    }
+
     @media (max-width: 768px) {
       .sidebar {
-        display: none;
+        transform: translateX(-100%);
+      }
+
+      .sidebar.active {
+        transform: translateX(0);
+      }
+
+      .main {
+        margin-left: 0;
+        padding: 80px 20px 20px;
+      }
+
+      .menu-toggle {
+        display: block;
+      }
+
+      .field-image {
+        max-width: 100%;
       }
     }
   </style>
 </head>
 <body>
-  <div class="sidebar">
+  <div class="menu-toggle" onclick="toggleMenu()">☰</div>
+
+  <div class="sidebar" id="sidebar">
     <h2>🌾 Paddy Dashboard</h2>
     <a href="#">Overview</a>
     <a href="#">Soil Data</a>
@@ -109,6 +168,15 @@
 
   <div class="main">
     <div class="header">Field Health Status</div>
+
+    <!-- Paddy Field Image -->
+    <img
+      src="https://ameriflux.lbl.gov/wp-content/uploads/2022/07/Wang_figure3-scaled.jpg"
+      alt="Paddy Field Condition"
+      class="field-image"
+    />
+
+    <!-- Data Cards -->
     <div class="cards">
       <div class="card">
         <h3>Nitrogen (N)</h3>
@@ -131,6 +199,56 @@
         <span class="status good">Optimal</span>
       </div>
     </div>
+
+    <!-- Chart Section -->
+    <canvas id="statusChart"></canvas>
   </div>
+
+  <script>
+    function toggleMenu() {
+      document.getElementById("sidebar").classList.toggle("active");
+    }
+
+    // Chart.js Setup
+    const ctx = document.getElementById('statusChart').getContext('2d');
+    const statusChart = new Chart(ctx, {
+      type: 'bar',
+      data: {
+        labels: ['Nitrogen (N)', 'Phosphorus (P)', 'Potassium (K)', 'Moisture'],
+        datasets: [{
+          label: 'Field Levels',
+          data: [78, 45, 25, 31],
+          backgroundColor: [
+            '#22c55e', // Green (Good)
+            '#facc15', // Yellow (Moderate)
+            '#f87171', // Red (Low)
+            '#60a5fa'  // Blue (Moisture Optimal)
+          ],
+          borderRadius: 10
+        }]
+      },
+      options: {
+        responsive: true,
+        scales: {
+          y: {
+            beginAtZero: true,
+            max: 100
+          }
+        },
+        plugins: {
+          legend: {
+            display: false
+          },
+          tooltip: {
+            callbacks: {
+              label: function(context) {
+                return `${context.label}: ${context.raw}`;
+              }
+            }
+          }
+        }
+      }
+    });
+  </script>
 </body>
 </html>
