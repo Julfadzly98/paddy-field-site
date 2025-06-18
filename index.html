@@ -78,10 +78,6 @@
       margin-top: 5px;
     }
 
-    .good { color: #15803d; }
-    .moderate { color: #b45309; }
-    .bad { color: #b91c1c; }
-
     .map img, .chart img {
       width: 100%;
       border-radius: 12px;
@@ -148,15 +144,38 @@
     <div class="monitoring">
       <div class="card map">
         <h3>🛰️ Crop Monitoring (NDVI)</h3>
-        <img src="data/main3.jpeg" alt="NDVI Map">
+        <img src="data/image3.jpeg" alt="NDVI Map">
       </div>
     </div>
 
     <div class="finance card">
-      <h3>Paddy Field Status</h3>
-      <p>-</p>
+      <h3>Paddy Field Status (NDVI)</h3>
+      <p>Based on satellite NDVI analysis</p>
       <div class="chart">
-        <img src="https://quickchart.io/chart?c={type:'pie',data:{labels:['Good','Bad Condition'],datasets:[{data:[4200,2200]}]}}" alt="Budget Pie Chart">
+        <img src="https://quickchart.io/chart?c={
+          type:'pie',
+          data:{
+            labels:[
+              'Healthy (Green)',
+              'Mild Stress (Yellow)',
+              'Moderate (Orange)',
+              'Poor (Red)',
+              'Very Poor (Dark Red)'
+            ],
+            datasets:[{
+              data:[19.99,22.42,19.83,19.89,17.87],
+              backgroundColor:['%2300FF00','%23FFFF00','%23FFA500','%23FF0000','%23800000']
+            }]
+          },
+          options:{
+            plugins:{
+              legend:{
+                position:'bottom',
+                labels:{font:{size:12}}
+              }
+            }
+          }
+        }" alt="NDVI Pie Chart">
       </div>
     </div>
   </div>
