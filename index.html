@@ -84,7 +84,6 @@
       margin: 0 auto;
     }
 
-    /* Hamburger menu styles */
     .hamburger {
       display: none;
       position: absolute;
@@ -163,47 +162,7 @@
     <div class="finance card">
       <h3>Paddy Field Status (NDVI)</h3>
       <div class="chart">
-        <img src="https://quickchart.io/chart?c={
-          type:'pie',
-          data:{
-            labels:[
-              'Healthy (Green)',
-              'Poor (Red)',
-              'Very Poor (Dark Red)',
-              'Mild Stress (Yellow)',
-              'Moderate (Orange)'
-            ],
-            datasets:[{
-              data:[34,26,18,12,10],
-              backgroundColor:[
-                '%2300FF00',
-                '%23FF0000',
-                '%23800000',
-                '%23FFFF00',
-                '%23FFA500'
-              ]
-            }]
-          },
-          options:{
-            plugins:{
-              tooltip:{
-                callbacks:{
-                  label:function(context){
-                    const label = context.label || '';
-                    const value = context.raw;
-                    const total = context.chart._metasets[0].total;
-                    const percent = ((value / total) * 100).toFixed(1);
-                    return label + ': ' + percent + '%';
-                  }
-                }
-              },
-              legend:{
-                position:'bottom',
-                labels:{font:{size:12}}
-              }
-            }
-          }
-        }" alt="NDVI Pie Chart">
+        <img src="https://quickchart.io/chart?c=%7B%22type%22%3A%22pie%22%2C%22data%22%3A%7B%22labels%22%3A%5B%22Healthy%20(Green)%22%2C%22Poor%20(Red)%22%2C%22Very%20Poor%20(Dark%20Red)%22%2C%22Mild%20Stress%20(Yellow)%22%2C%22Moderate%20(Orange)%22%5D%2C%22datasets%22%3A%5B%7B%22data%22%3A%5B34%2C26%2C18%2C12%2C10%5D%2C%22backgroundColor%22%3A%5B%22%2300FF00%22%2C%22%23FF0000%22%2C%22%23800000%22%2C%22%23FFFF00%22%2C%22%23FFA500%22%5D%7D%5D%7D%2C%22options%22%3A%7B%22plugins%22%3A%7B%22tooltip%22%3A%7B%22callbacks%22%3A%7B%22label%22%3A%22function(context)%7Bconst%20label%3Dcontext.label%7C%7C''%3Bconst%20value%3Dcontext.raw%3Bconst%20total%3Dcontext.chart._metasets%5B0%5D.total%3Bconst%20percent%3D((value%2Ftotal)*100).toFixed(1)%3Breturn%60%24%7Blabel%7D%3A%20%24%7Bpercent%7D%25%60%3B%7D%22%7D%7D%2C%22legend%22%3A%7B%22position%22%3A%22bottom%22%2C%22labels%22%3A%7B%22font%22%3A%7B%22size%22%3A12%7D%7D%7D%7D%7D%7D" alt="NDVI Pie Chart">
       </div>
     </div>
   </div>
