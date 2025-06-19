@@ -175,13 +175,28 @@
             ],
             datasets:[{
               data:[34,26,18,12,10],
-              backgroundColor:['%2300FF00','%23FF0000','%23800000','%23FFFF00','%23FFA500']
+              backgroundColor:[
+                '%2300FF00',
+                '%23FF0000',
+                '%23800000',
+                '%23FFFF00',
+                '%23FFA500'
+              ]
             }]
           },
           options:{
-            responsive:true,
-            maintainAspectRatio:false,
             plugins:{
+              tooltip:{
+                callbacks:{
+                  label:function(context){
+                    const label = context.label || '';
+                    const value = context.raw;
+                    const total = context.chart._metasets[0].total;
+                    const percent = ((value / total) * 100).toFixed(1);
+                    return label + ': ' + percent + '%';
+                  }
+                }
+              },
               legend:{
                 position:'bottom',
                 labels:{font:{size:12}}
